@@ -7,5 +7,5 @@ temp/
 coverege
 ormconfig.json
 dist
-uploads/*
+
 !uplaod/.gitkeep
