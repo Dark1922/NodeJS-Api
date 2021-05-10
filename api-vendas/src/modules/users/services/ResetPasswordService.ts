@@ -47,7 +47,9 @@ class ResetPasswordService {  //void precisa retornar nada
     //ai sim agente atualiza a senha do usuario
 
 //a senha do usuario vai receber a que ele passou , criptografia de senha
-    user.password = await hash(password, 8)
+    user.password = await hash(password, 8);
+
+    await usersRepository.save(user); //salvar o reset de senha do usuario
   }
 }
 
