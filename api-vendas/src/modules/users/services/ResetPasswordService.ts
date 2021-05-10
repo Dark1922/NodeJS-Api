@@ -26,7 +26,8 @@ class ResetPasswordService {  //void precisa retornar nada
     }
     //se passou daqui vai verificar se o usuario existe em nossa aplicação
     //vai passar nosso usertoken e o user_id , se o usuario é valido se n if not
-    const user = await usersRepository.findById(userToken.user_id)
+    const user = await usersRepository.findById(userToken.user_id);
+    //ele tem uma forenkey do usuario user_id
 
     if(!user) {//se o usuario n existi
       throw new AppError('user  does not exists.');
