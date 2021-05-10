@@ -2,6 +2,8 @@ import { Router } from 'express';
 import productsRouter from '@modules/products/routes/products.routes';
 import usersRouter from '@modules/users/routes/users.routes';
 import sessionsRouter from '@modules/users/routes/sessions.routes';
+import passwordRouter from '@modules/users/routes/password.routes';
+
 //importados o router pra fazer nossa rota
 const routes = Router();
 //qnd acessarmos o barra products ele vai chamar nosso productsRouter
@@ -11,4 +13,5 @@ routes.use('/users',usersRouter); //nossa rota de usuario
 
 routes.use('/sessions',sessionsRouter);
 
+routes.use('/password', passwordRouter)
 export default routes;
