@@ -16,7 +16,7 @@ import {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column('uuid')
+    @Column()
     @Generated('uuid')
     token: string; //coluna e que é um valor gerado automaticamente uuid
 
