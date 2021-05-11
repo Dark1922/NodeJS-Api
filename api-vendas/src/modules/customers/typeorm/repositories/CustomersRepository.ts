@@ -1,21 +1,44 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Customers from '../entities/Customer';
+import Customer from '../entities/Customer';
 
-@EntityRepository(Customers)
- class CustomersRepository extends Repository<Customers>{
+@EntityRepository(Customer)
+ class CustomersRepository extends Repository<Customer>{
 
-  public async findByName( name: string, email: string): Promise<Customers | undefined> {
+  public async findByName( name: string ): Promise<Customer | undefined> {
 
-    const client = await this.findOne({
+    const customer = await this.findOne({
 
       where: {
       name,
-      email,
+
       },
     });
+  return customer;
 
-  return client;
+  };
+  public async findById( id: string ): Promise<Customer | undefined> {
 
-  }
+    const customer = await this.findOne({
+
+      where: {
+      id,
+
+      },
+    });
+  return customer;
+
+  };
+  public async findByEmail( email: string ): Promise<Customer | undefined> {
+
+    const customer = await this.findOne({
+
+      where: {
+      email,
+
+      },
+    });
+  return customer;
+
+  };
 }
 export default CustomersRepository;
