@@ -5,7 +5,7 @@ import User from '../entities/User'
 //se extemde ao reposotory do typeorm e ele vai estar lidando com nosso User
  class UsersRepository extends  Repository<User>{
 
-  public async findByName( name:string ): Promise<User | undefined> {
+  public async findByName( name: string ): Promise<User | undefined> {
 
     const user = await this.findOne({ //pega o usuario pelo campo name
 
@@ -13,10 +13,11 @@ import User from '../entities/User'
       name, // pega pelo campo name
       },
     });
+
   return user;
 
   }
-  public async findById( id:string ): Promise<User | undefined> {
+  public async findById( id: string ): Promise<User | undefined> {
 
     const user = await this.findOne({ //pega o usuario pelo id
 
@@ -27,7 +28,7 @@ import User from '../entities/User'
   return user;
 
   }
-  public async findByEmail( email:string ): Promise<User | undefined> {
+  public async findByEmail( email: string ): Promise<User | undefined> {
 
     const user = await this.findOne({ //pega o usuario pelo email
 
