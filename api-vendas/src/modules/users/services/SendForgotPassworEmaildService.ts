@@ -23,15 +23,25 @@ class SendForgotPassworEmaildService {  //void precisa retornar nada
       throw new AppError('User does not exists')
     }
     //Se o email existir  vamos gerar um token pra esse usuarios, e passamos o user de cima . id que é um dos métodos do repositorio do user
-    const token = await userTokensRepository.Generate(user.id);
+    const { token } = await userTokensRepository.Generate(user.id);
 
     //console.log(token); //olha o token que tava vindo pra trocar senha
 
     //Configurações do Ethereal e seus metodos que fizemos padrão dele
     await EtherealMail.sendMail({
-       to: email,  //vai receber pro email que agente tá recebendo o link pra trocar senha
-       body: `Solicitação de redefinição de senha recebida: ${token?.token}`//sem consolelog aqui
-       //pelo template string passa a mensagem e o token
+       to: {
+        name: user.name,
+        email: user.email,
+       },
+       subject: '[API Vendas] Recuperação de Senha',
+       templateData: {
+        template: `Olá {{name}}: {{token}}`,
+        variables: {
+          name: user.name,
+          token,//token: token.token com o token da const sem {objeto},
+          //como o token tem o msm nome doq vai ser passado deixa só o token
+        }
+       },
     });
 
   }

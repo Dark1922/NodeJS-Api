@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import handlebarMailTemplate from './HandlebarMailTemplate';
-import HandlebarMailTemplate from './HandlebarMailTemplate';
+
 
 interface ItemplateVariable {
   [key: string]: string | number; //string ou number
@@ -54,7 +54,7 @@ export default class EtherealMail {
          address: to.email, //email
        },
        subject,
-       html: await mailTemplate.parse() , //método do nosso template como ele é async aqui bota await
+       html: await mailTemplate.parse(templateData), //método do nosso template como ele é async aqui bota await oque vai ser parseado é o templateData pelo nosso mailTemplate
      });
      //%s  é pra gente pegar o valor da variavel que agente ta passando depois da virgula
      //e incluir na mensagem

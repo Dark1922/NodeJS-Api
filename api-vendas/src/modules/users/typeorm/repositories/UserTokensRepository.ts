@@ -16,7 +16,7 @@ import UserToken from '../entities/UserToken';
   return userToken;
 
   }
-  public async Generate( user_id: string ): Promise<UserToken | undefined> {
+  public async Generate( user_id: string ): Promise<UserToken> {
         //GERARADOR DE   TOKEN
     const userToken = await this.create({ //cria user_id criando objeto
 
