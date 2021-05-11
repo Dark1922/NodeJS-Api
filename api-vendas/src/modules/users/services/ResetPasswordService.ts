@@ -5,6 +5,7 @@ import UserTokensRepository from '../typeorm/repositories/UserTokensRepository';
 import { isAfter, addHours } from 'date-fns';
 import { hash } from 'bcryptjs'
 
+
 interface IRequest {
   token: string;
   password: string;

@@ -3,6 +3,7 @@ import { getCustomRepository } from 'typeorm';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
 import UserTokensRepository from '../typeorm/repositories/UserTokensRepository';
 import EtherealMail from '@config/mail/EtherealMail';
+import path from 'path';
 
 interface IRequest {
   email: string;
@@ -25,7 +26,10 @@ class SendForgotPassworEmaildService {  //void precisa retornar nada
     //Se o email existir  vamos gerar um token pra esse usuarios, e passamos o user de cima . id que é um dos métodos do repositorio do user
     const { token } = await userTokensRepository.Generate(user.id);
 
-    //console.log(token); //olha o token que tava vindo pra trocar senha
+    //path temos o método resolve que nos ajuda ai no caminho pra chegar em certo arquivo
+    //__dirname vai pegar a referencia daonde agente estamos nosso arquivo atual
+    //descemos 1 nivel '..' para user e votamos a pasta views e o arquivo que queriamos apos ela
+    const forgotPasswordTemplate = path.resolve(__dirname,'..', 'views', 'forgot_password.hbs');
 
     //Configurações do Ethereal e seus metodos que fizemos padrão dele
     await EtherealMail.sendMail({
@@ -35,12 +39,13 @@ class SendForgotPassworEmaildService {  //void precisa retornar nada
        },
        subject: '[API Vendas] Recuperação de Senha',
        templateData: {
-        template: `Olá {{name}}: {{token}}`,
+        file: forgotPasswordTemplate, //nosso arquivo handlebars com css html
         variables: {
           name: user.name,
-          token,//token: token.token com o token da const sem {objeto},
-          //como o token tem o msm nome doq vai ser passado deixa só o token
-        }
+          link: `http://localhost:3000/reset_password?token=${token}`,
+          //como se tivessemos uma rota front end mandando um token contendo o link
+          //de troca do password aplicação front end com esse token aqui vai conseguir montar a estrutura que consiga pegar esse token e enviar pra nossa requisição reset_passoword aonde agente pega o token e a senha
+        },
        },
     });
 
