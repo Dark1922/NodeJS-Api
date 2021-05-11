@@ -7,7 +7,7 @@ interface ItemplateVariable {
   //eu vou ter uma interface com propriedades em que a chave vai ser do tipo string e o conteudo pode ser string ou numeros
 }
 interface IParseMailTemplate {
-  template: string;
+  file: string;
   variables:ItemplateVariable; //vai ser do tipo da interface acima
 }
 interface IMailContact { //complementação do to
