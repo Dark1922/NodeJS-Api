@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import  CustumersController  from '../controller/CustomersController';
 import { celebrate, Joi, Segments } from 'celebrate';
+import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 
 const customersRouter =  Router();
 
 const customersController = new CustumersController();
+
+customersRouter.use(isAuthenticated); //autenticação da rota
 
 customersRouter .get('/', customersController.index)
 

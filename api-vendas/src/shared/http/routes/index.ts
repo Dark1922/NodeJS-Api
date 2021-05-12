@@ -18,6 +18,6 @@ routes.use('/password', passwordRouter);
 
 routes.use('/profile', profileRouter);
 
-routes.use('/customer', customersRouter);
+routes.use('/customers', customersRouter);
 
 export default routes;
