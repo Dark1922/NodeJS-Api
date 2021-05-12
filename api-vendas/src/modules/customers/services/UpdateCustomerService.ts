@@ -17,7 +17,7 @@ class UpdateCostumerService {
   }: IRequest): Promise<Customer> {
     const customersRepository = getCustomRepository(CustomerRepository);
 
-    const customer = await  customersRepository.findOne(id);
+    const customer = await  customersRepository.findById(id);
 
     if (!customer) {
       throw new AppError('Customer not found.');
@@ -25,13 +25,13 @@ class UpdateCostumerService {
 
     const customerExists = await customersRepository.findByEmail(email);
 
-    if (customerExists && email !== customerExists.email ) {
+    if (customerExists && email !== customer.email) {
       throw new AppError('There is already one Customer with this email');
     }
     //se o email for igual aos que os outros customer/cliente usam
     //vai dar error no cadastro
     customer.name = name;
-    customer.email =email;
+    customer.email = email;
 
     await customersRepository.save(customer);
 
