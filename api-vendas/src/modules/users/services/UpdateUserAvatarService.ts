@@ -5,7 +5,7 @@ import UsersRepository from '../typeorm/repositories/UsersRepository';
 import path from 'path';
 import uploadConfig from '@config/upload'; //upload do avatar nome e diretorio
 import fs from 'fs';
-//biblioteca que nos condição de manipular sistema de arquivo fs
+//biblioteca que nos condição de manipular file sistema de arquivo fs
 
 interface IRequest {
   user_id: string; //usuario com o id de quem agt vai fazer o upload massa

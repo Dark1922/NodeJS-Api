@@ -9,7 +9,7 @@ export default class UsersAvatarController {
 
    const user = updateAvatar.execute({//executa os parametros que ele espera lá
     user_id: request.user.id,//temos ele no request.user que fizemos no @types
-    avatarFilename: request.file.filename, //ta no file e filename fez no controller
+    avatarFilename: request.file.filename, //ta no file e filename fez no service
 
    });
 
