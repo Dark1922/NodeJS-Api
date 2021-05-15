@@ -5,6 +5,7 @@ import { getCustomRepository } from 'typeorm';
 import Order from '../typeorm/entities/Order';
 import OrdersRepository from '../typeorm/repositories/OrdersRepository';
 
+
 interface IProduct {
   id: string; //ido do produto string
   quantity: number; //quantidade de produto
@@ -16,9 +17,9 @@ interface IRequest {
 
 class CreateOrderService {
   public async execute({ customer_id, products }: IRequest): Promise<Order> {
-    const ordersRepository = getCustomRepository(OrdersRepository);//instancias
+    const oderRepository  = getCustomRepository(OrdersRepository);
     const customerRepository = getCustomRepository(CustomersRepository);
-    const productRepository = getCustomRepository(ProductsRepository);
+    const productsRepository = getCustomRepository(ProductsRepository);
 
     //temos que garantir que client exista que os produto exista que cada produto tenha quantidade suficiente
     const customerExist = await customerRepository.findById(customer_id);
@@ -27,7 +28,7 @@ class CreateOrderService {
      throw new AppError('Could not find any Customer with the given id.');
     }
 
-    const existsProducts = await productRepository.findAllByIds(products);
+    const existsProducts = await productsRepository.findAllByIds(products);
     if (!existsProducts.length) {//se tem conteudo nele tamanho se n tem nd vai dar erro
       throw new AppError('Could not find any products with the given ids.')
     }
@@ -54,6 +55,28 @@ if (quantityAvailable.length) {//se o produto n tem a quantidade n pode vender
  }
 //garantimos q n vai ser vendido mais doq pode em estoque
 
+   const  serializedProducts = products.map(product => ({
+      product_id: product.id,
+      quantity: product.quantity,
+      price: existsProducts.filter(p => p.id === product.id)[0].price,
+  }));
+   //criando registro de order
+  const order = await oderRepository.createOrder({
+    customer: customerExist,
+    products: serializedProducts
+  })
+
+  const { order_products } = order;
+
+  const updatedProductQuantity = order_products.map(product => ({
+    //objeto com os dados do produto já com as quantidade deduzida
+    id: product.product_id, //instancias do OrderProductRepository ou order
+    quantity: existsProducts.filter(p => p.id === product.product_id)[0].quantity - product.quantity,
+
+  }));
+  await  productsRepository.save(updatedProductQuantity);
+
+  return order;
 }
 }
 

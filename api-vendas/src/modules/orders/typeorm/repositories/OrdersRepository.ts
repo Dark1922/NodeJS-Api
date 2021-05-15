@@ -30,7 +30,7 @@ interface IRequest {
    //nome do método que nós damos , quais são os dados enviados pela requisição do client do usario pra poder criar uma order em nossa aplicação vamos criar um interface pra isso lá encima abaixo dos import, vamos criar um pedido n precisa de undefined
    const order = this.create({//cria o objeto onde os dado tem que ser salvo
       customer,
-     order_products: products, //passa esse elemento da interfac pro products
+      order_products: products, //passa esse elemento da interfac pro products
    });
 
     await this.save(order) //salva o objeto criado

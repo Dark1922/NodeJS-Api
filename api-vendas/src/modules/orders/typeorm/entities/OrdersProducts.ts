@@ -30,6 +30,12 @@ order: Order;//é uma só pq orders manytoOne muitos para uma order pedido ou se
 @JoinColumn({name: 'product_id'})//coluna que faz a relação ao banco de dados vai fazer com a product_id e a order_id lá encima
 product: Product;//o campo que temos aqui e pra entidade Product
 
+@Column()
+order_id: string;
+
+@Column()
+product_id: string;
+
 @Column('int')
 quantity: number;
 
