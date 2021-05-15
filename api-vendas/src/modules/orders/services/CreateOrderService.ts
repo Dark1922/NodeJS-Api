@@ -44,7 +44,17 @@ class CreateOrderService {
     if (checkInexistentProducts.length) {//se tem conteudo nele tamanho se n tem nd vai dar erro
       throw new AppError(`Could not find product ${checkInexistentProducts[0].id}.`)
     }//vai pegar todos produtos inexistente vai retorna a 1 lista da array pegando o id esse id que foi enviado n existe na aplicação basta 1 pra devolver o processo pro usuario
-  }
+
+const quantityAvailable = products.filter(
+product => existsProducts.filter( p => product.id === product.id )[0].quantity < product.quantity,);
+
+if (quantityAvailable.length) {//se o produto n tem a quantidade n pode vender
+   throw new AppError(`The quantity ${quantityAvailable[0].quantity}
+    is not available for ${quantityAvailable[0].id}.`)
+ }
+//garantimos q n vai ser vendido mais doq pode em estoque
+
+}
 }
 
 export default CreateOrderService;
