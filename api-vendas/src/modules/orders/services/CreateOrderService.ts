@@ -72,7 +72,7 @@ if (quantityAvailable.length) {//se o produto n tem a quantidade n pode vender
     //objeto com os dados do produto já com as quantidade deduzida
     id: product.product_id, //instancias do OrderProductRepository ou order
     quantity: existsProducts.filter(p => p.id === product.product_id)[0].quantity - product.quantity,
-
+    //product_id é o id do produto, e o id do lado é do order ou order_product
   }));
   await  productsRepository.save(updatedProductQuantity);
 

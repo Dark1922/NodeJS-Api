@@ -1,10 +1,19 @@
 import { Request, Response } from 'express';
 import CreateOrderService from '../services/CreateOrderService';
+import ListOrderService from '../services/ListOrderService';
 import ShowOrderService from '../services/ShowOrderService';
 
 
 
 export default class OrdersController {
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const listOrders = new ListOrderService();
+
+    const orders = await listOrders.execute();
+
+    return response.json(orders);
+  }
 
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;

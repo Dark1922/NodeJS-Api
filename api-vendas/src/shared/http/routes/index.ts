@@ -5,6 +5,7 @@ import sessionsRouter from '@modules/users/routes/sessions.routes';
 import passwordRouter from '@modules/users/routes/password.routes';
 import profileRouter from '@modules/users/routes/profile.routes';
 import customersRouter from '@modules/customers/routes/customers.routes';
+import ordersRouter from '@modules/orders/routes/orders.routes';
 //importados o router pra fazer nossa rota
 const routes = Router();
 //qnd acessarmos o barra products ele vai chamar nosso productsRouter
@@ -19,5 +20,7 @@ routes.use('/password', passwordRouter);
 routes.use('/profile', profileRouter);
 
 routes.use('/customers', customersRouter);
+
+routes.use('/orders', ordersRouter);
 
 export default routes;
