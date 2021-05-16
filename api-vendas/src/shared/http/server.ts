@@ -1,4 +1,5 @@
-import 'reflect-metadata';
+import 'reflect-metadata';//tem que ser 1 da aplicação
+import 'dotenv/config'; //fazemos essa importação
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';

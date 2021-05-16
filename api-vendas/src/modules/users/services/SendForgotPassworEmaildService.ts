@@ -42,7 +42,7 @@ class SendForgotPassworEmaildService {  //void precisa retornar nada
         file: forgotPasswordTemplate, //nosso arquivo handlebars com css html
         variables: {
           name: user.name,
-          link: `http://localhost:3000/reset_password?token=${token}`,
+          link: `${process.env.APP_WEB_URL}/reset_password?token=${token}`,
           //como se tivessemos uma rota front end mandando um token contendo o link
           //de troca do password aplicação front end com esse token aqui vai conseguir montar a estrutura que consiga pegar esse token e enviar pra nossa requisição reset_passoword aonde agente pega o token e a senha
         },
