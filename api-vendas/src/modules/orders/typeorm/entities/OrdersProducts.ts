@@ -20,8 +20,8 @@ class OrdersProducts {
 id: string;
 
 //vai liberar aqui dps de configurar o order.ts
-@ManyToOne(() => Order, order => order.order_products)
-@JoinColumn({name: 'order_id'})
+@ManyToOne(() => Order, order => order.order_products)//relação de muitos para muitos
+@JoinColumn({name: 'order_id'})//ManyToMany pq ali tem o OneToMany do order_Products e também tem o ManyToOne order eles dois junto com as entidade se relacionando se torna muitos para muitos
 order: Order;//é uma só pq orders manytoOne muitos para uma order pedido ou seja muitos produtos para um pedido ou em um pedido é simplesmente uma instancia n tem array aqui
 
 

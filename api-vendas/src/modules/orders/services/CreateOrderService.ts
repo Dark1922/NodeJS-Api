@@ -47,7 +47,7 @@ class CreateOrderService {
     }//vai pegar todos produtos inexistente vai retorna a 1 lista da array pegando o id esse id que foi enviado n existe na aplicação basta 1 pra devolver o processo pro usuario
 
 const quantityAvailable = products.filter(
-product => existsProducts.filter( p => product.id === product.id )[0].quantity < product.quantity,);
+product => existsProducts.filter( p => product.id === product.id )[0].quantity < product.quantity);
 
 if (quantityAvailable.length) {//se o produto n tem a quantidade n pode vender
    throw new AppError(`The quantity ${quantityAvailable[0].quantity}
@@ -79,5 +79,4 @@ if (quantityAvailable.length) {//se o produto n tem a quantidade n pode vender
   return order;
 }
 }
-
 export default CreateOrderService;

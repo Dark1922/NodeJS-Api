@@ -1,4 +1,5 @@
 import {
+  Column,
    CreateDateColumn,
    Entity, JoinColumn,
    ManyToOne, OneToMany,
@@ -24,6 +25,9 @@ customer: Customer;
   cascade: true,
 })
 order_products: OrdersProducts[];
+
+@Column()
+customer_id: string;
 
 @CreateDateColumn()
 created_at: Date;

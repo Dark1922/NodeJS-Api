@@ -15,7 +15,7 @@ interface IRequest {
 }
 
 @EntityRepository(Order)
- class OrdersRepository extends  Repository<Order>{
+ class OrdersRepository extends Repository<Order>{
   //PARA PEGAR OS DADOS DE UM PEDIDO PELO ID ESPECIFICO
   public async findById( id: string ): Promise<Order | undefined> {
    //retorno é uma promessa que é um Order ou undefined nada
