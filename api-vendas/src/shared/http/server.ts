@@ -7,12 +7,15 @@ import  AppError  from '@shared/errors/AppError';
 import '@shared/typeorm';
 import { errors } from 'celebrate';
 import uploadConfig from '@config/upload';
+import { pagination } from 'typeorm-pagination'; //é um middleware de paginação
 
 const app = express();
 
 app.use(cors());
 
 app.use(express.json());
+
+app.use(pagination); //declara isso aqui e feito
 
 app.use('/files', express.static(uploadConfig.directory));//qnd acessarmos a rota /files ele vai pegar o coutendo que temos lá no diretorio uploads /files e o nome da imagem qlq imagem que está lá isso já vai estar disponivel no browse pra gente
 
