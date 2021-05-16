@@ -1,3 +1,4 @@
+import { classToClass } from "class-transformer";
 import { Request, Response } from "express";
 import CreateUserService from "../services/CreateUserService";
 import ListUserService from "../services/ListUserService";
@@ -10,7 +11,7 @@ const listUser = new ListUserService(); //instancia o serviço
 //lista de usuario onde agente vai chamar nosso serviço
 
 const users = await listUser.execute(); //método da lista de serviço e vai rodar o nosso find que pega todos os serviços listado de usuarios
-return response.json(users); //response.json e retorna os usuario dessa lista
+return response.json(classToClass(users)); //response.json e retorna os usuario dessa lista
 //método index pronto lul
 }
   //e o serviço create pra usarmos o createUser né
@@ -26,6 +27,6 @@ return response.json(users); //response.json e retorna os usuario dessa lista
       email,
       password
     });
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 }

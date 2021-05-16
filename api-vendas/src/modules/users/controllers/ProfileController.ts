@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import ShowProfileService from "../services/ShowProfileService";
 import UpdateProfileService from "../services/UpdateProfileService";
+import { classToClass } from 'class-transformer';
 
  export default class ProfileController {
 
@@ -12,7 +13,7 @@ import UpdateProfileService from "../services/UpdateProfileService";
 
   const user = await showProfile.execute({ user_id });
 
-  return response.json(user);
+  return response.json(classToClass(user)); //n vai trazer a senha mais
 }
 
   public async update( request: Request, response: Response ): Promise<Response> {
@@ -30,6 +31,6 @@ import UpdateProfileService from "../services/UpdateProfileService";
       password,
       old_password
     });
-    return response.json(user); //retorna um json com esse usuario
+    return response.json(classToClass(user)); //retorna um json com esse usuario
   }
 }

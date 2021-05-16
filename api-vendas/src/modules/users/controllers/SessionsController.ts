@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import {Request, Response} from 'express';
 import CreateSessionsService from '../services/CreateSessionsService';
 
@@ -15,6 +16,6 @@ public async create( request: Request, response: Response ): Promise<Response> {
     password
   });
 
-  return response.json(user);
+  return response.json(classToClass(user));
 };
 }
