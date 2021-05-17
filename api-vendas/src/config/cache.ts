@@ -8,7 +8,6 @@ interface ICacheConfig {
   driver: string;
 }
 
-
 //configurações padrões do redis
 export default {
     config: {
