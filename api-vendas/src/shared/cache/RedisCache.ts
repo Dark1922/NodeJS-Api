@@ -15,11 +15,23 @@ export default class  RedisCache {
   }
 
   //recover é recuperar um dado ai passa a chave que é string
-  //public async recover<T>(key: string): Promise<T | undefined> {
-    //<T> que eles são do mesmo tipo
+  public async recover<T>(key: string): Promise<T | null> {
+    //<T> que eles são do mesmo tipo de retorno
+    const data = await this.client.get(key)
+    //get método do redis pra buscamors informação
+    if(!data) {
+      return null; //se n tiver nada retorna nulo
+    }
+    //pega a data os dados que agente recebe que agente faz um json.stringify para recuperar  temos que fazer um json.parse pra pode--lo devolvelo pro padrão original
+   const parsedData = JSON.parse(data) as T; //T qual é o tipo da informação generic T
 
+   return parsedData;
+
+  }
     //excluir o método
     public async invalidate(key: string): Promise<void> {
+      //await direto pq é void precisa retorna nada
+     await this.client.del(key);
 
     }
   }
